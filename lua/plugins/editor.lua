@@ -1,7 +1,7 @@
 return {
   {
     "nvim-telescope/telescope.nvim",
-    branch = "0.1.x",
+    version = "v0.2.1",
     dependencies = { "nvim-lua/plenary.nvim" },
     keys = {
       { "<C-f>", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Find in current file" },
