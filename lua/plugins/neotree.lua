@@ -7,7 +7,18 @@ return {
       "MunifTanjim/nui.nvim",
       "nvim-tree/nvim-web-devicons", -- optional, but recommended
     },
+    event = "VimEnter",
     opts = {},
+    config = function(_, opts)
+      require("neo-tree").setup(opts)
+      vim.schedule(function()
+        require("neo-tree.command").execute({
+          action = "show",
+          source = "filesystem",
+          position = "left",
+        })
+      end)
+    end,
     init = function()
       vim.api.nvim_create_user_command("FocusTree", function()
         local file = vim.api.nvim_buf_get_name(0)
@@ -19,10 +30,18 @@ return {
           reveal_force_cwd = true,
         })
       end, { desc = "Focus file explorer" })
+
+      vim.api.nvim_create_user_command("ToggleTreeFocus", function()
+        if vim.bo.filetype == "neo-tree" then
+          vim.cmd("wincmd p")
+          return
+        end
+
+        vim.cmd("FocusTree")
+      end, { desc = "Toggle focus between file explorer and editor" })
     end,
     keys = {
-      { "<leader>e", "<cmd>Neotree toggle<cr>", desc = "Toggle file explorer" },
-      { "<leader>ef", "<cmd>FocusTree<cr>", desc = "Focus file explorer" },
+      { "<leader>e", "<cmd>ToggleTreeFocus<cr>", desc = "Toggle file explorer focus" },
     },
   },
 }

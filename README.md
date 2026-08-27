@@ -40,6 +40,7 @@ Leader is `Space`.
 | `Space e f` | Focus file explorer and reveal current file |
 | `Space o` | Toggle code outline |
 | `Space c f` | Format current buffer |
+| `Space d` | Show diagnostic under the cursor |
 | `]t` / `[t` | Next / previous TODO-style comment |
 | `Space f t` | Search TODO-style comments |
 | `Space r s` | Start or reconnect to a remote Neovim session |
