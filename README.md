@@ -9,6 +9,7 @@ Personal Neovim configuration built with Lua and [lazy.nvim](https://github.com/
 - A Nerd Font for icons
 - `ripgrep` for repository text search
 - `tree-sitter-cli`, a C compiler, `curl`, and `tar` for Treesitter parsers
+- A Rust toolchain (`rustc` and `cargo`) for Rust LSP support
 - OpenSSH, `curl`, and `tar` for remote development
 
 ## Install
