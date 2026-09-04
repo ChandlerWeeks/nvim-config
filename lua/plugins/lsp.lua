@@ -23,6 +23,13 @@ return {
         },
       })
 
+      vim.lsp.config("basedpyright", {
+        capabilities = require("blink.cmp").get_lsp_capabilities(),
+        settings = {
+          basedpyright = { analysis = { typeCheckingMode = "standard" } },
+        },
+      })
+
       if vim.fn.executable("rustc") == 1 and vim.fn.executable("cargo") == 1 then
         vim.lsp.enable("rust_analyzer")
       end
@@ -32,7 +39,7 @@ return {
     "mason-org/mason-lspconfig.nvim",
     dependencies = { "mason-org/mason.nvim", "neovim/nvim-lspconfig" },
     opts = {
-      ensure_installed = { "rust_analyzer" },
+      ensure_installed = { "basedpyright", "rust_analyzer" },
       automatic_enable = { exclude = { "rust_analyzer" } },
     },
   },

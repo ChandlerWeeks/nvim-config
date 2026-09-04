@@ -7,12 +7,16 @@ return {
     config = function()
       local treesitter = require("nvim-treesitter")
 
-      if not vim.list_contains(treesitter.get_installed("parsers"), "rust") then
-        treesitter.install({ "rust" }):wait(300000)
+      local parsers = treesitter.get_installed("parsers")
+      local missing_parsers = vim.tbl_filter(function(parser)
+        return not vim.list_contains(parsers, parser)
+      end, { "python", "rust" })
+      if #missing_parsers > 0 then
+        treesitter.install(missing_parsers):wait(300000)
       end
 
       vim.api.nvim_create_autocmd("FileType", {
-        pattern = "rust",
+        pattern = { "python", "rust" },
         callback = function()
           local ok, err = pcall(vim.treesitter.start)
           if not ok then
